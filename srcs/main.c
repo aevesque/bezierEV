@@ -17,6 +17,14 @@ void	renderFrame(Context *context, TermGL termGL)
 	}
 }
 
+void	outputControlPoint(Context *context)
+{
+	printf("Control points :\n");
+	for (int i = 0; i < context->control_point_count; ++i)
+		printf("\t%.4f, %.4f\n", context->control_points[i].x * -1, context->control_points[i].y * -1);
+		//multiplying by * -1 changes the space from -1 - 1 (-1, -1 is top left) to 1 - -1 (-1, -1 is bottom right)
+}
+
 int main(void)
 {
 	TermGL	termGL = termGLInit(50, 50);
@@ -34,6 +42,8 @@ int main(void)
 		renderFrame(&context, termGL);
 		renderDisplay(termGL);
 	}
+
+	outputControlPoint(&context);
 
 	free(context.control_points);
 	termGLDestroy(termGL);
