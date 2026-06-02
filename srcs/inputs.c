@@ -9,7 +9,7 @@ inline static void	createPoint(Context *context)
 {
 	context->control_point_count += 1;
 	context->control_points = realloc(context->control_points, context->control_point_count * sizeof(*context->control_points));
-	context->control_points[context->control_point_count - 1] = context->control_points[context->control_point_count - 2];
+	memmove(&context->control_points[context->current_point + 1], &context->control_points[context->current_point], (context->control_point_count - 1 - context->current_point) * sizeof(fVec3));
 	selectNextPoint(context);
 }
 
