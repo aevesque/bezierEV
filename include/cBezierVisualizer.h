@@ -5,7 +5,8 @@
 
 # define MOVE_INCREMENT	0.1f
 # define STEP_INCREMENT 0.01f
-# define MIN_STEP	0.01f
+# define STARTING_STEP	0.01f
+# define MIN_STEP	0.001f
 
 # define LINE_COLOR	GREEN
 # define POINT_COLOR	WHITE

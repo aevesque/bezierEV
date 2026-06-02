@@ -23,7 +23,7 @@ int main(void)
 	Context context = {
 		.control_points = calloc(sizeof(fVec3), 2),
 		.control_point_count = 2,
-		.step = 0.01f,
+		.step = STARTING_STEP,
 	};
 
 	setFramerate(10, termGL);
