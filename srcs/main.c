@@ -2,12 +2,13 @@
 
 void	renderFrame(Context *context, TermGL termGL)
 {
-	uintVec3	control_points[context->control_point_count];
+	iVec3	control_points[context->control_point_count];
 
 	for (int i = 0; i < context->control_point_count; ++i)
 	{
-		control_points[i] = toAbsolute(context->control_points[i], DISPLAY(termGL));
-		setPixelZBuffered(control_points[i].x, control_points[i].y, ALWAYS_ON_TOP, (i == context->current_point ? SEL_POINT_COLOR : POINT_COLOR), DISPLAY(termGL));
+		control_points[i] = toAbsoluteUnbound(context->control_points[i], DISPLAY(termGL));
+		if (control_points[i].x >= 0 && control_points[i].x < getDisplayWidth(termGL) && control_points[i].y >= 0 && control_points[i].y < getDisplayHeight(termGL))
+			setPixelZBuffered(control_points[i].x, control_points[i].y, ALWAYS_ON_TOP, (i == context->current_point ? SEL_POINT_COLOR : POINT_COLOR), DISPLAY(termGL));
 	}
 
 	for (float t = 0; t < 1; t += context->step)

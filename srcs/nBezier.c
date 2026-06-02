@@ -5,7 +5,7 @@ float	lerp(const float start, const float target, const float t)
 	return (start + t * (target - start));
 }
 
-fVec3	nBezier(const uintVec3 *control_points, const unsigned int control_point_count, const float t)
+fVec3	nBezier(const iVec3 *control_points, const unsigned int control_point_count, const float t)
 {
 	if (control_point_count < 3)
 		return ((fVec3) {

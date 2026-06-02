@@ -12,7 +12,7 @@
 # define POINT_COLOR	WHITE
 # define SEL_POINT_COLOR	RED
 
-fVec3	nBezier(const uintVec3 *control_points, const unsigned int control_point_count, const float t);
+fVec3	nBezier(const iVec3 *control_points, const unsigned int control_point_count, const float t);
 
 typedef struct {
 	int	should_quit;
