@@ -20,7 +20,8 @@ void	renderFrame(Context *context, TermGL termGL)
 	for (float t = 0; t < 1; t += context->step)
 	{
 		const fVec3	p = nBezier(control_points, context->control_point_count, t);
-		setPixel(p.x, p.y, LINE_COLOR, DISPLAY(termGL));
+		if ((int)p.x >= 0 && p.x < getDisplayWidth(termGL) && (int)p.y >= 0 && p.y < getDisplayHeight(termGL))
+			setPixel(p.x, p.y, LINE_COLOR, DISPLAY(termGL));
 	}
 }
 
