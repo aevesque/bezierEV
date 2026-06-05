@@ -5,6 +5,11 @@ inline static void	selectNextPoint(Context *context)
 	context->current_point = (context->current_point + 1) % context->control_point_count;
 }
 
+inline static void	selectPrevPoint(Context *context)
+{
+	context->current_point = (context->current_point - 1) + (context->control_point_count * (context->current_point == 0));
+}
+
 inline static void	createPoint(Context *context)
 {
 	context->control_point_count += 1;
@@ -34,6 +39,7 @@ void	inputHandler(char keycode, void *v_context)
 		case 's': context->control_points[context->current_point].y += MOVE_INCREMENT; break;
 		case 'd': context->control_points[context->current_point].x += MOVE_INCREMENT; break;
 		case 'q': selectNextPoint(context); break;
+		case 'Q': selectPrevPoint(context); break;
 		case '+': createPoint(context); break;
 		case '-': deleteLastPoint(context); break;
 		case 'i': context->step += STEP_INCREMENT; break;
