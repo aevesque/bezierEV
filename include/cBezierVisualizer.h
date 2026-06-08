@@ -27,5 +27,7 @@ typedef struct {
 }	Context;
 
 void	inputHandler(char keycode, void *v_context);
+
+void	displayGeneralInfo(Context *context, TermGL termGL);
 void	displayPointInfo(Context *context, TermGL termGL);
 #endif

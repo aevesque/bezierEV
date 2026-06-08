@@ -18,6 +18,7 @@ void	renderFrame(Context *context, TermGL termGL)
 			setPixel(p.x, p.y, LINE_COLOR, DISPLAY(termGL));
 	}
 
+	displayGeneralInfo(context, termGL);
 	displayPointInfo(context, termGL);
 }
 
