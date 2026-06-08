@@ -36,6 +36,7 @@ int main(void)
 		.control_points = calloc(sizeof(fVec3), 2),
 		.control_point_count = 2,
 		.step = STARTING_STEP,
+		.move_resolution = STARTING_MOVE_RESOLUTION,
 	};
 
 	setFramerate(10, termGL);

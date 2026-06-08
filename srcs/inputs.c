@@ -28,21 +28,37 @@ inline static void	deleteLastPoint(Context *context)
 		context->current_point = context->control_point_count - 1;
 }
 
+inline static void	decrementMoveResolution(Context *context)
+{
+	context->move_resolution *= 10;
+	if (context->move_resolution > MAX_MOVE_RESOLUTION / 10)
+		context->move_resolution = 0.1f;
+}
+
+inline static void	incrementMoveResolution(Context *context)
+{
+	context->move_resolution /= 10;
+	if (context->move_resolution < MIN_MOVE_RESOLUTION)
+		context->move_resolution = MIN_MOVE_RESOLUTION;
+}
+
 void	inputHandler(char keycode, void *v_context)
 {
 	Context	*context = v_context;
 
 	switch(keycode) {
 		case 27: context->should_quit = 1; break;
-		case 'w': context->control_points[context->current_point].y -= MOVE_INCREMENT; break;
-		case 'a': context->control_points[context->current_point].x -= MOVE_INCREMENT; break;
-		case 's': context->control_points[context->current_point].y += MOVE_INCREMENT; break;
-		case 'd': context->control_points[context->current_point].x += MOVE_INCREMENT; break;
+		case 'w': context->control_points[context->current_point].y -= context->move_resolution; break;
+		case 'a': context->control_points[context->current_point].x -= context->move_resolution; break;
+		case 's': context->control_points[context->current_point].y += context->move_resolution; break;
+		case 'd': context->control_points[context->current_point].x += context->move_resolution; break;
 		case 'q': selectNextPoint(context); break;
 		case 'Q': selectPrevPoint(context); break;
 		case '+': createPoint(context); break;
 		case '-': deleteLastPoint(context); break;
 		case 'i': context->step += STEP_INCREMENT; break;
 		case 'k': context->step = (context->step - STEP_INCREMENT < MIN_STEP ? MIN_STEP : context->step - STEP_INCREMENT); break;
+		case 'E': incrementMoveResolution(context); break;
+		case 'e': decrementMoveResolution(context); break;
 	}
 }
