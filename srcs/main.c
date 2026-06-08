@@ -11,18 +11,14 @@ void	renderFrame(Context *context, TermGL termGL)
 			setPixelZBuffered(control_points[i].x, control_points[i].y, ALWAYS_ON_TOP, (i == context->current_point ? SEL_POINT_COLOR : POINT_COLOR), DISPLAY(termGL));
 	}
 
-	fVec3	*current_point = &context->control_points[context->current_point];
-
-	char buffer[40];
-	sprintf(buffer, "Current point : %01d (%.4f, %.4f)", context->current_point, context->control_points[context->current_point].x, context->control_points[context->current_point].y);
-	putText(buffer, 0, getDisplayHeight(termGL) - 1, BLACK, WHITE, DISPLAY(termGL));
-
 	for (float t = 0; t < 1; t += context->step)
 	{
 		const fVec3	p = nBezier(control_points, context->control_point_count, t);
 		if ((int)p.x >= 0 && p.x < getDisplayWidth(termGL) && (int)p.y >= 0 && p.y < getDisplayHeight(termGL))
 			setPixel(p.x, p.y, LINE_COLOR, DISPLAY(termGL));
 	}
+
+	displayPointInfo(context, termGL);
 }
 
 void	outputControlPoint(Context *context)
