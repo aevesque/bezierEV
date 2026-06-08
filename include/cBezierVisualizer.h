@@ -7,9 +7,8 @@
 # define MIN_MOVE_RESOLUTION 0.0001f
 # define MAX_MOVE_RESOLUTION 1.0f
 
-# define STEP_INCREMENT 0.01f
-# define STARTING_STEP	0.01f
-# define MIN_STEP	0.001f
+# define STARTING_CURVE_RESOLUTION (1.0f / 100)
+# define MIN_CURVE_RESOLUTION (1.0f / 1000)
 
 # define LINE_COLOR	GREEN
 # define POINT_COLOR	WHITE
@@ -22,7 +21,8 @@ typedef struct {
 	int	current_point;
 	fVec3	*control_points;
 	int	control_point_count;
-	float	step;
+	unsigned int	curve_point_count;
+	float	curve_resolution;
 	float	move_resolution;
 }	Context;
 

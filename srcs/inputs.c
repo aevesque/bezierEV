@@ -42,6 +42,22 @@ inline static void	incrementMoveResolution(Context *context)
 		context->move_resolution = MIN_MOVE_RESOLUTION;
 }
 
+inline static void	decrementCurvePointCount(Context *context)
+{
+	if (context->curve_point_count == 1)
+		return ;
+	context->curve_point_count--;
+	context->curve_resolution = 1.0f / context->curve_point_count;
+}
+
+inline static void	incrementCurvePointCount(Context *context)
+{
+	if (context->curve_point_count == 999)
+		return ;
+	context->curve_point_count++;
+	context->curve_resolution = 1.0f / context->curve_point_count;
+}
+
 void	inputHandler(char keycode, void *v_context)
 {
 	Context	*context = v_context;
@@ -56,9 +72,9 @@ void	inputHandler(char keycode, void *v_context)
 		case 'Q': selectPrevPoint(context); break;
 		case '+': createPoint(context); break;
 		case '-': deleteLastPoint(context); break;
-		case 'i': context->step += STEP_INCREMENT; break;
-		case 'k': context->step = (context->step - STEP_INCREMENT < MIN_STEP ? MIN_STEP : context->step - STEP_INCREMENT); break;
 		case 'E': incrementMoveResolution(context); break;
 		case 'e': decrementMoveResolution(context); break;
+		case 'r': incrementCurvePointCount(context); break;
+		case 'R': decrementCurvePointCount(context); break;
 	}
 }

@@ -11,7 +11,7 @@ void	renderFrame(Context *context, TermGL termGL)
 			setPixelZBuffered(control_points[i].x, control_points[i].y, ALWAYS_ON_TOP, (i == context->current_point ? SEL_POINT_COLOR : POINT_COLOR), DISPLAY(termGL));
 	}
 
-	for (float t = 0; t < 1; t += context->step)
+	for (float t = 0; t < 1; t += context->curve_resolution)
 	{
 		const fVec3	p = nBezier(control_points, context->control_point_count, t);
 		if ((int)p.x >= 0 && p.x < getDisplayWidth(termGL) && (int)p.y >= 0 && p.y < getDisplayHeight(termGL))
@@ -31,11 +31,12 @@ void	outputControlPoint(Context *context)
 
 int main(void)
 {
-	TermGL	termGL = termGLInit(50, 50);
+	TermGL	termGL = termGLInit(100, 100);
 	Context context = {
 		.control_points = calloc(sizeof(fVec3), 2),
 		.control_point_count = 2,
-		.step = STARTING_STEP,
+		.curve_resolution = STARTING_CURVE_RESOLUTION,
+		.curve_point_count = 1 / STARTING_CURVE_RESOLUTION,
 		.move_resolution = STARTING_MOVE_RESOLUTION,
 	};
 
