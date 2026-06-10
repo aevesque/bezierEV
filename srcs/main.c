@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 		renderDisplay(termGL);
 	}
 
-	generateOutput(parsed.filename, &context);
+	generateOutput(&parsed, &context);
 
 	free(context.control_points);
 	termGLDestroy(termGL);

@@ -1,18 +1,18 @@
 #include "../include/cBezierVisualizer.h"
 
-static void	outputControlPoint(const int fd, Context *context)
+static void	outputControlPoint(const int fd, const int *scale, Context *context)
 {
 	dprintf(fd, "Control points:\n");
 	for (int i = 0; i < context->control_point_count; ++i)
-		dprintf(fd, "\t%.4f, %.4f\n", context->control_points[i].x, context->control_points[i].y * -1);
+		dprintf(fd, "\t%.4f, %.4f\n", context->control_points[i].x * scale[0], context->control_points[i].y * -1 * scale[1]);
 		//changing the space from (-1, -1 is top left) to (1, -1 is bottom right)
 }
 
-static void	outputCurve(const int fd, Context *context)
+static void	outputCurve(const int fd, const int *scale, Context *context)
 {
 	iVec3	control_points[context->control_point_count];
 
-	Image	temp = initImage(100, 100);
+	Image	temp = initImage(scale[0], scale[1]);
 
 	for (int i = 0; i < context->control_point_count; ++i)
 		control_points[i] = toAbsoluteUnbound(context->control_points[i], &temp);
@@ -27,13 +27,13 @@ static void	outputCurve(const int fd, Context *context)
 	}
 }
 
-void	generateOutput(const char *filename, Context *context)
+void	generateOutput(Parsed *parsed, Context *context)
 {
-	int	fd = open(filename, O_CREAT | O_WRONLY, 00644);
+	int	fd = open(parsed->filename, O_CREAT | O_WRONLY, 00644);
 
 	if (fd < 0)
-		return (printf("error: could not create or open %s\n", filename), (void)0);
-	outputControlPoint(fd, context);
-	outputCurve(fd, context);
+		return (printf("error: could not create or open %s\n", parsed->filename), (void)0);
+	outputControlPoint(fd, parsed->scale, context);
+	outputCurve(fd, parsed->scale, context);
 	close(fd);
 }

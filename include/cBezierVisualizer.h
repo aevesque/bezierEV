@@ -6,8 +6,10 @@
 # define C_BEZIER_VISUALIZER
 
 # define DEFAULT_FILENAME	"output"
+# define DEFAULT_SCALE		{100, 100}
 typedef struct {
 	char *filename;
+	int	scale[2];
 }	Parsed;
 
 int	parse(int argc, char **argv, Parsed *output);
@@ -40,5 +42,5 @@ void	inputHandler(char keycode, void *v_context);
 void	displayGeneralInfo(Context *context, TermGL termGL);
 void	displayPointInfo(Context *context, TermGL termGL);
 
-void	generateOutput(const char *filename, Context *context);
+void	generateOutput(Parsed *parsed, Context *context);
 #endif
