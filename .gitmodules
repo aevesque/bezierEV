@@ -1,0 +1,3 @@
+[submodule "termGL"]
+	path = termGL
+	url = git@github.com:aevesque/termGL.git
