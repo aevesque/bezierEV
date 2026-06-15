@@ -76,5 +76,6 @@ void	inputHandler(char keycode, void *v_context)
 		case 'e': decrementMoveResolution(context); break;
 		case 'r': incrementCurvePointCount(context); break;
 		case 'R': decrementCurvePointCount(context); break;
+		case 'h': context->should_display_help = !context->should_display_help;
 	}
 }

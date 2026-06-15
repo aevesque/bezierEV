@@ -30,6 +30,7 @@ fVec3	nBezier(const iVec3 *control_points, const unsigned int control_point_coun
 
 typedef struct {
 	int	should_quit;
+	int	should_display_help;
 	int	current_point;
 	fVec3	*control_points;
 	int	control_point_count;
@@ -45,6 +46,8 @@ void	inputHandler(char keycode, void *v_context);
 
 void	displayGeneralInfo(Context *context, TermGL termGL);
 void	displayPointInfo(Context *context, TermGL termGL);
+void	displayHelpPrompt(TermGL termGL);
+void	displayHelp(TermGL termGL);
 
 void	generateOutput(Parsed *parsed, Context *context);
 #endif

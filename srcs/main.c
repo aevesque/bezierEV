@@ -4,6 +4,9 @@ void	renderFrame(Context *context, TermGL termGL)
 {
 	iVec3	control_points[context->control_point_count];
 
+	if (context->should_display_help)
+		return (displayHelp(termGL));
+
 	for (int i = 0; i < context->control_point_count; ++i)
 	{
 		control_points[i] = toAbsoluteUnbound(context->control_points[i], DISPLAY(termGL));
@@ -20,6 +23,7 @@ void	renderFrame(Context *context, TermGL termGL)
 
 	displayGeneralInfo(context, termGL);
 	displayPointInfo(context, termGL);
+	displayHelpPrompt(termGL);
 }
 
 int main(int argc, char **argv)

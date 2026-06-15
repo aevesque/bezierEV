@@ -41,4 +41,5 @@ Bezier curve editor and visualizer relying on termGL
 - e/E : increase/decrease movement sensitivity
 - r/R : increase/decrease amount of curve points
 - esc : save to file and quit
+- h : display help
 
