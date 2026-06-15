@@ -23,6 +23,8 @@ Bezier curve editor and visualizer relying on termGL
 
   -o [file]: set [file] as the output file (defaults to 'output')
 
+  -i [file]: set [file] as the input file
+
   -s [number]: set [number] as both x and y output scale
 
   -x [number]: set [number] as the x output scale

@@ -12,6 +12,7 @@ SRCS := main.c\
 	textinfo.c\
 	output.c\
 	parsing.c\
+	context.c\
 
 OBJ_DIR = objs
 OBJ := ${addprefix ${OBJ_DIR}/, ${SRCS:.c=.o}}

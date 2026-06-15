@@ -9,6 +9,7 @@
 # define DEFAULT_SCALE		{100, 100}
 typedef struct {
 	char *filename;
+	char *input_file;
 	int	scale[2];
 }	Parsed;
 
@@ -36,6 +37,9 @@ typedef struct {
 	float	curve_resolution;
 	float	move_resolution;
 }	Context;
+
+Context	defaultContext(void);
+int	buildContextFromFile(const char *filename, char *program_name, Context *context);
 
 void	inputHandler(char keycode, void *v_context);
 

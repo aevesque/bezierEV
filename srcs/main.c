@@ -29,15 +29,16 @@ int main(int argc, char **argv)
 	if (parse(argc, argv, &parsed))
 		return (1);
 
-	TermGL	termGL = termGLInit(100, 100);
-	Context context = {
-		.control_points = calloc(2, sizeof(fVec3)),
-		.control_point_count = 2,
-		.curve_resolution = STARTING_CURVE_RESOLUTION,
-		.curve_point_count = 1 / STARTING_CURVE_RESOLUTION,
-		.move_resolution = STARTING_MOVE_RESOLUTION,
-	};
+	Context context;
+	if (parsed.input_file)
+	{
+		if (buildContextFromFile(parsed.input_file, argv[0], &context))
+			return (1);
+	}
+	else
+		context = defaultContext();
 
+	TermGL	termGL = termGLInit(100, 100);
 	setFramerate(10, termGL);
 	registerInputHandler(inputHandler, &context, termGL);
 
