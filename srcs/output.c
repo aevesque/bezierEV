@@ -1,12 +1,14 @@
 #include "../include/cBezierVisualizer.h"
 
-static void	outputHeader(const int fd, Context *context)
+static void	outputHeader(const int fd, Parsed *parsed, Context *context)
 {
 	dprintf(fd,
 		"bezier curve created by bezierEV.\n"
 		"%d control points\n"
 		"%d curve points (%.4f fixed interpolation interval)\n"
-		, context->control_point_count, context->curve_point_count, context->curve_resolution);
+		"scaled in X by %d\n"
+		"scaled in Y by %d\n"
+		, context->control_point_count, context->curve_point_count, context->curve_resolution, parsed->scale[0], parsed->scale[1]);
 }
 
 static void	outputControlPoint(const int fd, const int *scale, Context *context)
@@ -42,7 +44,7 @@ void	generateOutput(Parsed *parsed, Context *context)
 
 	if (fd < 0)
 		return (printf("error: could not create or open %s\n", parsed->filename), (void)0);
-	outputHeader(fd, context);
+	outputHeader(fd, parsed, context);
 	outputControlPoint(fd, parsed->scale, context);
 	outputCurve(fd, parsed->scale, context);
 	close(fd);
