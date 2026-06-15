@@ -3,11 +3,12 @@
 static void	outputHeader(const int fd, Parsed *parsed, Context *context)
 {
 	dprintf(fd,
-		"bezier curve created by bezierEV.\n"
+		"Bezier curve created by bezierEV. This is an automatically generated file. Changing it in any way might break functionality.\n\n"
 		"%d control points\n"
-		"%d curve points (%.4f fixed interpolation interval)\n"
-		"scaled in X by %d\n"
-		"scaled in Y by %d\n"
+		"%d curve points (%.4f fixed interpolation interval)\n\n"
+		"Range :\n"
+		"0 - %d in X\n"
+		"0 - %d in Y\n\n"
 		, context->control_point_count, context->curve_point_count, context->curve_resolution, parsed->scale[0], parsed->scale[1]);
 }
 
